@@ -641,3 +641,5 @@ async function recibirData() {
 
 recibirData()
 
+// Antonio es el Navigator
+console.log("patata")
