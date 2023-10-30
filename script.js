@@ -60,17 +60,17 @@ console.log(mappedArr)
 // abreviatura de propiedades de objeto
 
 let username = "Antonio";
-let age = 30;
+let userAge = 30;
 
 
 // const user = {
 //   username: username,
-//   age: age
+//   userAge: userAge
 // }
 
 const user = {
   username,
-  age,
+  userAge,
   job: "CTA"
 }
 
@@ -104,5 +104,72 @@ videogame.name = "Mario Wonder"
 // console.log(videogame)
 
 // deberiamos siempre crear objetos, arrays y funciones de flecha como constantes.
+
+
+
+
+
+// Destructuracion o deconstruccion es una tecnica para reducir codigo.
+
+const oneDogFromData = {
+  name: "Beethoven",
+  breed: "San Bernardo",
+  age: 8
+}
+
+/* 
+const { propiedadesAExtraer } = objetoDelCualVamosAExtraer
+*/
+
+// const { name, breed, age } = oneDogFromData
+// const name = "Beethoven"
+// const breed = "San Bernardo"
+// const age = 8
+
+
+// console.log( `${name} es un perrito de raza ${breed} y tiene ${age} añitos de edad` )
+// console.log( `${name} es el mejor perrito del mundo 11/10` )
+
+
+
+function describirPerrito({ name, breed, age }) {
+
+  // const { name, breed, age } = singleDog
+
+  console.log( `${name} es un perrito de raza ${breed} y tiene ${age} añitos de edad` )
+  console.log( `${name} es el mejor perrito del mundo 11/10` )
+
+}
+
+
+describirPerrito(oneDogFromData)
+
+const secondDog = {
+  name: "Balto",
+  breed: "Husky Siberiano",
+  age: 5
+}
+
+describirPerrito(secondDog)
+
+
+// destructuracion de arrays
+
+
+const topThreeBooksEver = [ "Dragonlance", "Harry Potter", "MundoDisco" ]
+
+const [ libro1, libro2, libro3 = "Señor de los Anillos" ] = topThreeBooksEver
+// cuando destructuramos en array, nosotros le damos nombre a las variables. Y el orden indica el valor.
+// const libro1 = "Dragonlance"
+// const libro2 = "Harry Potter"
+// const libro3 = "MundoDisco"
+
+// libro3 = "Señor de los Anillos" dice que si no existe el valor, ese seria el predeterminado
+
+// console.log(`mis 3 libros favoritos son: ${topThreeBooksEver[0]}, ${topThreeBooksEver[1]} y ${topThreeBooksEver[2]} `)
+console.log(`mis 3 libros favoritos son: ${libro1}, ${libro2} y ${libro3} `)
+
+
+// asignar valores predeterminados en caso que no existan. Igualando al momento de destructurar
 
 
