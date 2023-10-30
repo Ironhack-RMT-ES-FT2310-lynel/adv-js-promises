@@ -440,3 +440,82 @@ console.log ( sortByScore(newStudents) );
 //     { name: 'milo', score: 4.3 }
 //   ]
 // }
+
+
+// JS Asincrono
+
+
+const btnNode = document.querySelector("#btn")
+const containerNode = document.querySelector("#container")
+
+btnNode.addEventListener("click", () => {
+
+  console.log("probando")
+
+  // fetch => nos permite contactar con API externa y traer informacion
+  
+  // Promesa es un objeto que determina la posible respuesta de una operacion asincrona
+  
+  const data = fetch("https://api.spacexdata.com/v5/launches/latest")
+  data.then((response) => {
+    // cuando esto este listo, entonces quiero hacer algo 
+    console.log(response)
+    return response.json() // convertirla en un formato legible
+  })
+  .then((responseInJSON) => {
+    console.log(responseInJSON)
+
+    const imageNode = document.createElement("img")
+    imageNode.src = responseInJSON.links.patch.small
+    containerNode.append(imageNode)
+
+  })
+
+})
+
+
+
+
+// Formas diferentes de resolver operaciones asincronas en JS
+
+
+
+
+// voy a similar una funcion que busca un libro en un lugar externo a mi codigo y me devuelve ese libro de forma asincrona 0 - 1 seg en procesar.
+function pedirUnLibro(bookIndex, callbackCuandoEsteListo) {
+
+  const books = [
+    "1. La comunidad del anillo",
+    "2. Las dos torres",
+    "3. El retorno del Rey"
+  ]
+
+  setTimeout(() => {
+
+    // return books[bookIndex]
+    let foundBook = books[bookIndex]
+    callbackCuandoEsteListo(foundBook)
+
+    //  vamos a replicar que entregar el libro toma 0 y 2 segundo
+  }, Math.random() * 2000)
+}
+
+// const requestedBook = pedirUnLibro(0)
+// console.log(requestedBook)
+
+pedirUnLibro( 0, (book) => {
+  console.log("leyendo el libro", book)
+
+  pedirUnLibro( 1, (book) => {
+    console.log("leyendo el libro", book)
+
+    pedirUnLibro( 2, (book) => {
+      console.log("leyendo el libro", book)
+    } )
+
+  } )
+
+} )
+
+
+
