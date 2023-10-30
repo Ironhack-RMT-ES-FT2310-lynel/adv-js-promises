@@ -503,19 +503,57 @@ function pedirUnLibro(bookIndex, callbackCuandoEsteListo) {
 // const requestedBook = pedirUnLibro(0)
 // console.log(requestedBook)
 
-pedirUnLibro( 0, (book) => {
-  console.log("leyendo el libro", book)
+// pedirUnLibro( 0, (book) => {
+//   console.log("leyendo el libro", book)
 
-  pedirUnLibro( 1, (book) => {
-    console.log("leyendo el libro", book)
+//   pedirUnLibro( 1, (book) => {
+//     console.log("leyendo el libro", book)
 
-    pedirUnLibro( 2, (book) => {
-      console.log("leyendo el libro", book)
-    } )
+//     pedirUnLibro( 2, (book) => {
+//       console.log("leyendo el libro", book)
+//     } )
 
-  } )
+//   } )
 
-} )
+// } )
+
+// pyramid of DOOM
+// callback hell
+
+
+
+
+
+
+// aqui nosotro replicamos una funcion que llama a un lugar externo y mi codigo para pedir data
+function pedirUnLibroComoPromesa(bookIndex) {
+
+  const books = [
+    "1. La comunidad del anillo",
+    "2. Las dos torres",
+    "3. El retorno del rey"
+  ]
+
+  return new Promise((resolve, reject) => {
+
+    // similar un comportamiento asincrono
+    setTimeout(() => {
+      let foundBook = books[bookIndex]
+      resolve(foundBook)
+    }, Math.random() * 3000) // 0 y 3 segundos
+
+  })
+
+}
+
+// como resolvemos una promesa
+
+pedirUnLibroComoPromesa(0)
+.then((response) => {
+  console.log("esto se ejecuta cuando la promise este resuelta correctamente (success). Tengamos la data necesaria.")
+  console.log(response)
+})
+
 
 
 
