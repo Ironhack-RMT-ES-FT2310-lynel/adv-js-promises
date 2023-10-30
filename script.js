@@ -561,23 +561,23 @@ function pedirUnLibroComoPromesa(bookIndex) {
 //   console.log(error)
 // })
 
-// pedirUnLibroComoPromesa(0)
-// .then((response) => {
-//   console.log("leyendo el libro", response) // 1er libro
+pedirUnLibroComoPromesa(0)
+.then((response) => {
+  console.log("leyendo el libro", response) // 1er libro
 
-//   return pedirUnLibroComoPromesa(1) // pido el segundo
-// })
-// .then((response) => {
-//   console.log("leyendo el libro", response) // 2do libro
+  return pedirUnLibroComoPromesa(10) // pido el segundo
+})
+.then((response) => {
+  console.log("leyendo el libro", response) // 2do libro
 
-//   return pedirUnLibroComoPromesa(2) // pedir el 3rd libro
-// })
-// .then((response) => {
-//   console.log("leyendo el libro", response) // 3er libro
-// })
-// .catch((error) => {
-//   console.log(error)
-// })
+  return pedirUnLibroComoPromesa(2) // pedir el 3rd libro
+})
+.then((response) => {
+  console.log("leyendo el libro", response) // 3er libro
+})
+.catch((error) => {
+  console.log(error)
+})
 
 
 
@@ -609,4 +609,35 @@ Promise.allSettled([
 .then((response) => {
   console.log(response)
 })
+
+
+// resolviendo promesas con async/await
+// 1. debemos trabajar dentro de una funcion
+// async => la funcion va a ser de tipo asincrona 
+// await => para esperar la resolucion de una promesa al llamarla
+
+async function recibirData() {
+
+  try {
+    // try es: JS va a INTENTAR procesar lo siguiente...
+
+    let response1 = await pedirUnLibroComoPromesa(0) 
+    // JS espera que se resuelva esta linea (el tiempo que tome) antes de continuar
+    console.log(response1)
+  
+    let response2 = await pedirUnLibroComoPromesa(10)
+    console.log(response2)
+  
+    let response3 = await pedirUnLibroComoPromesa(2)
+    console.log(response3)
+
+  } catch(err) {
+    // ...si algo falla, entonces procesa lo que haya acá
+    console.log(err)
+  }
+
+}
+
+
+recibirData()
 
