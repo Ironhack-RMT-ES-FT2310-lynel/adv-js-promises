@@ -173,3 +173,170 @@ console.log(`mis 3 libros favoritos son: ${libro1}, ${libro2} y ${libro3} `)
 // asignar valores predeterminados en caso que no existan. Igualando al momento de destructurar
 
 
+
+
+const [a, b] = [1];
+console.log(a * b); // <== ???
+
+// b:
+const [c, d = 1] = [2];
+console.log(c * d); // <== ???
+// const c = 2
+// const d = 1
+
+// b:
+let [e, f = 2, g, h = 1] = [3, 4];
+console.log(e, f, g, h); // ==> ???
+// let e = 3
+// let f = 4
+// let g = undefined
+// let h = 1
+
+
+const data = {
+  name: {
+    firstName: 'ana',
+    lastName: 'marino',
+  },
+  isStudent: true,
+  favoriteFootballTeam: 'fc barcelona',
+  hometown: {
+    city: 'buenos aires',
+    country: 'argentina',
+  },
+};
+
+const { favoriteFootballTeam } = data
+console.log(favoriteFootballTeam)
+
+
+
+const person = {
+  firstName: "Elon",
+  secondName: "Musk",
+  job: "X CEO (formerly twitter)",
+  other: {
+    about: {
+      hobby: "Viajar a Marte",
+      otherCompanies: ["Tesla", "StarLink", "Boring Company"]
+    }
+  }
+}
+
+const { job } = person
+console.log(job)
+
+console.log(person.other.about.hobby) // como destructurar solo hobby
+
+// const { other } = person
+// const { about } = other
+// const { hobby } = about
+// console.log(hobby)
+
+// let hobby = person.other.about.hobby
+
+// destructuracion anidada
+const { other: { about: { hobby, otherCompanies: [, , c3] } } } = person
+console.log(hobby)
+console.log(c3)
+
+
+
+
+
+let numbersArr = [3, 10, 80, 20]
+
+
+// let maxNum = Math.max( 3, 10, 80, 20 )
+
+// SPREAD Operator => operador de esparcir => ...
+// no modifica el array original
+
+let maxNum = Math.max( ...numbersArr ) // => esparcimos aqui todos los elementos del array
+console.log(maxNum)
+
+
+const students = ["Chalo", "Abraham", "Alejandro", "Jairo"]
+const students2 = ["Alicia", "Adrian", "Miguel"]
+
+// quiero un array que tenga todos los estudiantes de los dos arrays
+
+const allStudents = [ ...students, ...students2, "Diego", "Raul" ]
+console.log(allStudents)
+
+console.log(...students)
+
+
+const newNumbers = [1, 2, 3, 4]
+const copy = [...newNumbers] // o map, o slice, o JSON parse JSON stringify
+
+copy.reverse()
+
+console.log(copy)
+console.log(newNumbers)
+
+
+const somePeople = [
+  {
+    name: "Jorge",
+    candy: 10
+  }, // ref abcd
+  {
+    name: "Antonio",
+    candy: 20
+  }, // ref erty
+  {
+    name: "Ruth",
+    candy: 15
+  }, // ref xcvb
+] // ref 1234
+
+const peopleClone = [...somePeople] // shallow clone => copiamos la referencia solo del array ref 9876
+
+// const peopleClone = JSON.parse( JSON.stringify(somePeople) ) // deep clone => clonar TODAS las referencias internas que haya dentro de este objeto
+
+peopleClone.pop() // ref 9876
+
+
+peopleClone[0].candy = 100; // ref abcd
+
+console.log(peopleClone) // ref 9876
+console.log(somePeople) // ref 1234
+
+
+// operador REST => operador de el resto => ...
+
+
+const hobbies = ["videojuegos", "surfear", "cocinar", "juegos de mesa"]
+
+const [ firstHobby, secondHobby, ...otherHobbies ] = hobbies
+// const firstHobby = "videojuegos"
+// const otherHobbies => el resto de los elementos que no hayan sido destructurados. Organizar en un array.
+
+console.log(firstHobby)
+console.log(secondHobby)
+console.log(otherHobbies)
+
+
+function verificarSiEsDiez(...restOfNumbers) {
+  console.log(restOfNumbers)
+  // devolvernos un mensaje si el resultado es 10
+  let sum = restOfNumbers.reduce( (acc, elem) => {
+    return acc + elem
+  }, 0)
+
+  if (sum === 10) {
+    return "El valor es 10 exacto!"
+  } else if (sum < 10){
+    return "No llegó a 10 :("
+  } else {
+    return "Se paso de 10!!"
+  }
+}
+
+
+console.log( verificarSiEsDiez(1, 4, 5) )
+console.log( verificarSiEsDiez(10) )
+console.log( verificarSiEsDiez(5, 8) )
+
+// no importa cuandos argumentos yo le pase, el sistema usa solo esos le paso
