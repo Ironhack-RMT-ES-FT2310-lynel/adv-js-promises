@@ -539,7 +539,11 @@ function pedirUnLibroComoPromesa(bookIndex) {
     // similar un comportamiento asincrono
     setTimeout(() => {
       let foundBook = books[bookIndex]
-      resolve(foundBook)
+      if (foundBook === undefined) {
+        reject("No existen libros con esa posicion") // error
+      } else {
+        resolve(foundBook)
+      }
     }, Math.random() * 3000) // 0 y 3 segundos
 
   })
@@ -548,12 +552,61 @@ function pedirUnLibroComoPromesa(bookIndex) {
 
 // como resolvemos una promesa
 
-pedirUnLibroComoPromesa(0)
-.then((response) => {
-  console.log("esto se ejecuta cuando la promise este resuelta correctamente (success). Tengamos la data necesaria.")
-  console.log(response)
+// let thePromise = pedirUnLibroComoPromesa(1)
+
+// thePromise.then((response) => {
+//   console.log(response)
+// })
+// .catch((error) => {
+//   console.log(error)
+// })
+
+// pedirUnLibroComoPromesa(0)
+// .then((response) => {
+//   console.log("leyendo el libro", response) // 1er libro
+
+//   return pedirUnLibroComoPromesa(1) // pido el segundo
+// })
+// .then((response) => {
+//   console.log("leyendo el libro", response) // 2do libro
+
+//   return pedirUnLibroComoPromesa(2) // pedir el 3rd libro
+// })
+// .then((response) => {
+//   console.log("leyendo el libro", response) // 3er libro
+// })
+// .catch((error) => {
+//   console.log(error)
+// })
+
+
+
+// algunas veces yo quiero recibir toda la data sin importar el orden en que se reciben. En el tiempo de ejecucion más eficiente quiero recibir todo.
+
+
+// Promise.all & Promise.allSettled
+
+Promise.all([
+  pedirUnLibroComoPromesa(0),
+  pedirUnLibroComoPromesa(10),
+  pedirUnLibroComoPromesa(2),
+])
+.then((allResponses) => {
+  // enviar todas las llamada al mismo momento y devolvernos una respuesta lo antes posible.
+  console.log(allResponses)
+})
+.catch((error) => {
+  // si al menos una de las promesas falla, TODO falla
+  console.log(error)
 })
 
 
-
+Promise.allSettled([
+  pedirUnLibroComoPromesa(0),
+  pedirUnLibroComoPromesa(10),
+  pedirUnLibroComoPromesa(2),
+])
+.then((response) => {
+  console.log(response)
+})
 
