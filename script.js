@@ -340,3 +340,103 @@ console.log( verificarSiEsDiez(10) )
 console.log( verificarSiEsDiez(5, 8) )
 
 // no importa cuandos argumentos yo le pase, el sistema usa solo esos le paso
+
+// Complete the function sortByScore that receives an array of students and Sorts them best score and list best 3 as:
+// After sorting, it should return an object with 4 properties as shown below:
+// {
+//  fistPlace: the student Object in first place, 
+//  secondPlace: the student Object in second place, 
+//  thirdPlace: the student Object in third place, .
+//  others: everyone else not appearing above in a new Array
+// }
+
+const newStudents = [
+  {
+    name: 'ana',
+    score: 5.4
+  },
+  {
+    name: 'ivan',
+    score: 7.5
+  },
+  {
+    name: 'milo',
+    score: 4.3
+  },
+  {
+    name: 'igor',
+    score: 7.0
+  },
+  {
+    name: 'george',
+    score: 8.9
+  },
+  {
+    name: 'jess',
+    score: 10.0
+  },
+  {
+    name: 'kevin',
+    score: 8.8
+  },
+  {
+    name: 'beth',
+    score: 7.1
+  }
+];
+
+
+function sortByScore(arr) {  
+  // .. your code here
+  // shallow clone the original `arr` before sorting
+  
+  // shallow clone is [...arr]
+  // deep clone is structuredClone(arr) or JSON.parse(JSON.stringify(arr))
+
+  let clone = [...arr]
+
+  clone.sort((elem1, elem2) => {
+    // if (elem1.score > elem2.score) {
+    //   return -1
+    // } else {
+    //   return 1
+    // }
+    return elem2.score - elem1.score
+  })
+
+  console.log(clone)
+
+  // let firstPlace = clone.shift()
+  // let secondPlace = clone.shift()
+  // let thirdPlace = clone.shift()
+  // let others = clone
+
+  const [ firstPlace, secondPlace, thirdPlace, ...others ] = clone
+  // const firstPlace = { name: 'jess', score: 10.0 }
+  
+  // you can console.log each result or return them all as an object (both are fine)
+  const data = {
+    firstPlace,
+    secondPlace,
+    thirdPlace,
+    others
+  }
+
+  return data
+}
+
+console.log ( sortByScore(newStudents) );
+
+// Expected Output from the function => 
+// {
+//   firstPlace: { name: 'jess', score: 10 },
+//   secondPlace: { name: 'george', score: 8.9 },
+//   thirdPlace: { name: 'kevin', score: 8.8 },
+//   others: [
+//     { name: 'ivan', score: 7.5 },
+//     { name: 'beth', score: 7.1 },
+//     { name: 'igor', score: 7 },
+//     { name: 'ana', score: 5.4 },
+//     { name: 'milo', score: 4.3 }
+//   ]
+// }
