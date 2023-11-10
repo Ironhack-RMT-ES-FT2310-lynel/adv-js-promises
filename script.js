@@ -642,5 +642,5 @@ async function recibirData() {
 recibirData()
 
 // Antonio es el Navigator
-console.log("patata")
-console.log("tacos de patata con chorizo")
+console.log("papaya")
+console.log("tacos de chorizo con patata")
